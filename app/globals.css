@@ -1,0 +1,298 @@
+
+@import "tailwindcss";
+
+:root {
+  --background: #09291b;
+  --card: #183b29;
+  --heading: #f2b8d0;
+  --text: #ffe6f0;
+  --border: #d987a8;
+  --button: #a65378;
+  --button-hover: #c56d91;
+  --accent: #e9a8c4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  color: var(--text);
+}
+
+input::placeholder {
+  color: rgba(255, 230, 240, 0.62);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* GREEN BACKGROUND */
+.bg-magic {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 10%, #36794a 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, #9fcba0 0%, transparent 35%),
+    linear-gradient(135deg, #061b10 0%, #103d24 35%, #1e6338 65%, #092719 100%);
+  color: var(--text);
+}
+
+/* DARK GREEN CARDS + PINK BORDER */
+.magic-card {
+  background: rgba(24, 59, 41, 0.92);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(2, 14, 7, 0.38),
+    0 0 30px rgba(233, 168, 196, 0.05);
+  color: var(--text);
+}
+
+/* GREEN GRADIENT */
+.green-gradient {
+  background: linear-gradient(135deg, #0a2617, #164832, #28563a);
+}
+
+/* PINK GRADIENT */
+.pink-gradient {
+  background: linear-gradient(135deg, #63354d, var(--button), var(--button-hover));
+}
+
+/* PINK HEADING GRADIENT */
+.gold-text {
+  background: linear-gradient(90deg, var(--heading), var(--accent), #ffd6e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* PINK GLOW */
+.glow {
+  box-shadow: 0 0 38px rgba(233, 168, 196, 0.24),
+    0 16px 40px rgba(2, 14, 7, 0.28);
+}
+
+.floating {
+  animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes flower-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* FLOWERS */
+.flower {
+  position: fixed;
+  top: -10%;
+  pointer-events: none;
+  z-index: 40;
+  animation-name: flower-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0 0 7px rgba(233, 168, 196, 0.35));
+}
+
+.twinkle {
+  color: var(--accent);
+  animation: twinkle 2s ease-in-out infinite;
+  text-shadow: 0 0 12px rgba(233, 168, 196, 0.7);
+}
+
+.pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+/* PAGE LAYOUT */
+.page-shell {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  color: var(--text);
+}
+
+/* PINK BUTTON */
+.btn-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--button);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(2, 14, 7, 0.32),
+    0 0 18px rgba(233, 168, 196, 0.09);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: var(--button-hover);
+  box-shadow: 0 15px 35px rgba(197, 109, 145, 0.22),
+    0 0 22px rgba(233, 168, 196, 0.16);
+}
+
+.btn-pink {
+  background: var(--button);
+  color: var(--text);
+  border: 1px solid var(--accent);
+}
+
+.btn-pink:hover {
+  background: var(--button-hover);
+}
+
+/* PHOTO FRAME */
+.photo-frame {
+  border: 8px solid var(--card);
+  outline: 2px solid var(--border);
+  box-shadow: 0 15px 45px rgba(2, 14, 7, 0.38),
+    0 0 25px rgba(233, 168, 196, 0.10);
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* PINK HEADING TEXT */
+.text-pink-200,
+.text-pink-300,
+.text-pink-400,
+.text-pink-500,
+.text-pink-600 {
+  color: var(--heading) !important;
+}
+
+/* LIGHT TEXT */
+.text-emerald-900,
+.text-emerald-800,
+.text-emerald-700,
+.text-emerald-600,
+.text-emerald-500 {
+  color: var(--text) !important;
+}
+
+/* PINK / GOLD ACCENTS */
+.text-yellow-500,
+.text-yellow-300 {
+  color: var(--accent) !important;
+}
+
+/* DARK GREEN SECTION BACKGROUNDS */
+.bg-pink-50,
+.bg-pink-100,
+.bg-emerald-50,
+.bg-white\/80 {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* PINK BORDERS */
+.border-emerald-100,
+.border-pink-200,
+.border-white\/60 {
+  border-color: var(--border) !important;
+}
+
+/* HOVER */
+.hover\:bg-pink-100:hover {
+  background: rgba(217, 135, 168, 0.16) !important;
+}
+
+/* FOCUS */
+.focus\:border-pink-300:focus {
+  border-color: var(--accent) !important;
+}
+
+.focus\:ring-pink-100:focus {
+  --tw-ring-color: rgba(233, 168, 196, 0.28) !important;
+}
+
+/* GLASS BACKGROUND */
+.bg-white\/80 {
+  background: rgba(24, 59, 41, 0.92) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* NAVBAR */
+nav.fixed {
+  background: rgba(12, 38, 24, 0.95) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 12px 38px rgba(2, 14, 7, 0.38),
+    0 0 24px rgba(233, 168, 196, 0.08) !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .photo-frame {
+    border-width: 5px;
+    border-radius: 18px;
+  }
+
+  .btn-primary {
+    padding: 12px 22px;
+  }
+}
