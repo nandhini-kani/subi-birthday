@@ -14,27 +14,32 @@ export default function MusicPlayer() {
 
     audio.volume = 0.5;
 
+    // Start music
     const startMusic = async () => {
       try {
         await audio.play();
         sessionStorage.setItem("birthday-music-playing", "true");
       } catch (error) {
-        console.log("Music playback was blocked:", error);
+        console.log("Browser blocked autoplay:", error);
         setPlaying(false);
       }
     };
 
+    // Called after successful login
     const handleMusicStart = () => {
       startMusic();
     };
 
     window.addEventListener("birthday-music-start", handleMusicStart);
 
-    // Play automatically if login was already completed
-    if (
-      sessionStorage.getItem("subi-birthday-unlocked") === "true" &&
-      sessionStorage.getItem("birthday-music-playing") !== "false"
-    ) {
+    // Resume if already unlocked after login
+    const unlocked =
+      sessionStorage.getItem("subi-birthday-unlocked") === "true";
+
+    const musicEnabled =
+      sessionStorage.getItem("birthday-music-playing") !== "false";
+
+    if (unlocked && musicEnabled) {
       startMusic();
     }
 
@@ -43,7 +48,8 @@ export default function MusicPlayer() {
     };
   }, []);
 
-  async function toggleMusic() {
+  // Play / Pause button
+  const toggleMusic = async () => {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -51,14 +57,15 @@ export default function MusicPlayer() {
       try {
         await audio.play();
         sessionStorage.setItem("birthday-music-playing", "true");
-      } catch {
+      } catch (error) {
+        console.log("Unable to play music:", error);
         setPlaying(false);
       }
     } else {
       audio.pause();
       sessionStorage.setItem("birthday-music-playing", "false");
     }
-  }
+  };
 
   return (
     <>
@@ -66,11 +73,13 @@ export default function MusicPlayer() {
         ref={audioRef}
         src="/music/birthday-song.mp3"
         loop
+        preload="auto"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
 
       <button
+        type="button"
         onClick={toggleMusic}
         className="fixed bottom-5 right-5 z-[9999] flex items-center gap-2 rounded-full pink-gradient px-4 py-3 text-pink-100 shadow-xl transition hover:scale-105"
         aria-label={playing ? "Pause music" : "Play music"}

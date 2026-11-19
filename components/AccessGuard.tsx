@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -16,9 +17,13 @@ export default function AccessGuard({
 
     if (access !== "true") {
       router.replace("/");
-    } else {
-      setAllowed(true);
+      return;
     }
+
+    setAllowed(true);
+
+    // Start birthday music after access is confirmed
+    window.dispatchEvent(new Event("birthday-music-start"));
   }, [router]);
 
   if (!allowed) {
